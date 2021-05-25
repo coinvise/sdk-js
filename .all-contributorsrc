@@ -1,0 +1,26 @@
+{
+  "projectName": "sdk-js",
+  "projectOwner": "coinvise",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "eslint",
+  "contributors": [
+    {
+      "login": "mihirgupta0900",
+      "name": "Mihir Gupta",
+      "avatar_url": "https://avatars.githubusercontent.com/u/37367148?v=4",
+      "profile": "https://github.com/mihirgupta0900",
+      "contributions": [
+        "code",
+        "doc",
+        "infra"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}

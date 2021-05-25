@@ -21,7 +21,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "lint": "eslint . && prettier --write --ignore-unknown .",
+    "lint": "eslint src/. && prettier --write --ignore-unknown src/.",
     "prepare": "husky install && npm run lint && npm run build",
     "prebuild": "npm run clean",
     "clean": "rm -rf ./build"
@@ -37,6 +37,7 @@
     "@types/node": "^15.6.1",
     "@typescript-eslint/eslint-plugin": "^4.25.0",
     "@typescript-eslint/parser": "^4.25.0",
+    "all-contributors-cli": "^6.20.0",
     "eslint": "^7.27.0",
     "eslint-config-prettier": "^8.3.0",
     "husky": "^6.0.0",
