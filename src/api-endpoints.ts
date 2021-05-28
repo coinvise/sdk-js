@@ -1,12 +1,21 @@
 import type { Method } from 'got';
-import { APIMessage } from './api-types';
+import { APIMessage } from './interfaces/api-types';
+import { User } from './interfaces/client.interface';
 
 export const mintToken: Endpoint = {
   method: 'PUT',
   pathParams: [],
   queryParams: [],
   bodyParams: [],
-  path: () => 'token',
+  path: () => '/token',
+};
+
+export const changeWebhookUrl: Endpoint = {
+  method: 'PATCH',
+  pathParams: [],
+  queryParams: [],
+  bodyParams: [],
+  path: () => '/users/webhook',
 };
 
 export type MintTokenParams = {
@@ -14,6 +23,15 @@ export type MintTokenParams = {
   symbol: string;
   minterAddress: string;
   chainId: number;
+};
+
+export type ChangeWebhookUrlParams = {
+  url: string;
+};
+
+export type ChangeWebhookUrlResponse = {
+  data: User;
+  message: APIMessage.UPDATED;
 };
 
 export interface MintTokenResponse {

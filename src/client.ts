@@ -1,44 +1,27 @@
 import crypto from 'crypto';
-import got, {
-  Agents as GotAgents,
-  Got,
-  Method,
-  Options as GotOptions,
-} from 'got';
+import got, { Agents as GotAgents, Got } from 'got';
 import { Agent } from 'http';
 import { URL } from 'url';
-import { mintToken, MintTokenParams, MintTokenResponse } from './api-endpoints';
+import {
+  changeWebhookUrl,
+  ChangeWebhookUrlParams,
+  ChangeWebhookUrlResponse,
+  mintToken,
+  MintTokenParams,
+  MintTokenResponse,
+} from './api-endpoints';
 import { buildRequestError, HTTPResponseError } from './errors';
 import { AuthHeaders } from './interfaces/auth.interface';
+import {
+  ClientOptions,
+  RequestParameters,
+} from './interfaces/client.interface';
 import {
   Logger,
   LogLevel,
   logLevelSeverity,
   makeConsoleLogger,
 } from './logging';
-
-export interface ClientOptions {
-  accessId: string;
-  privateKey: string;
-  timeoutMs?: number;
-  baseUrl?: string;
-  logLevel?: LogLevel;
-  logger?: Logger;
-  agent?: Agent;
-
-  // TODO: use enum
-  coinviseVersion?: string;
-}
-
-export interface RequestParameters {
-  path: string;
-  method: Method;
-  query?: QueryParams;
-  body?: {
-    [k: string]: unknown;
-  };
-  auth?: string;
-}
 
 export default class Client {
   #accessId: string;
@@ -56,18 +39,14 @@ export default class Client {
     this.#logLevel = options.logLevel ?? LogLevel.WARN;
     this.#logger = options.logger ?? makeConsoleLogger(this.constructor.name);
 
-    const prefixUrl = (options?.baseUrl ?? 'https://api.coinvise.co') + '/v1/';
+    const prefixUrl = options?.baseUrl ?? 'https://api.coinvise.co';
     const timeout = options?.timeoutMs ?? 60_000;
-    const coinviseVersion =
-      options?.coinviseVersion ?? Client.defaultCoinviseVersion;
 
     this.#got = got.extend({
       prefixUrl,
       timeout,
       headers: {
-        'Notion-Version': coinviseVersion,
-        // TODO: update with format appropriate for telemetry, use version from package.json
-        'user-agent': 'notionhq-client/0.1.0',
+        'user-agent': 'coinvise-client/0.1.0',
       },
       retry: 0,
       agent: makeAgentOption(prefixUrl, options?.agent),
@@ -143,7 +122,14 @@ export default class Client {
     },
   };
 
-  // TODO: update webhook url and secret
+  public changeWebhookUrl = (
+    args: ChangeWebhookUrlParams
+  ): Promise<ChangeWebhookUrlResponse> =>
+    this.request({
+      path: changeWebhookUrl.path(),
+      method: changeWebhookUrl.method,
+      body: args,
+    });
 
   /**
    * Emits a log message to the console.
@@ -213,8 +199,3 @@ function selectProtocol(prefixUrl: string): 'http' | 'https' {
 
   throw new TypeError('baseUrl option must begin with "https://" or "http://"');
 }
-
-/*
- * Type aliases to support the generic request interface.
- */
-type QueryParams = GotOptions['searchParams'];
