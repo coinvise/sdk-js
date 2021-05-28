@@ -1,15 +1,15 @@
+import crypto from 'crypto';
 import got, {
-  Got,
   Agents as GotAgents,
-  Options as GotOptions,
-  Headers as GotHeaders,
+  Got,
   Method,
+  Options as GotOptions,
 } from 'got';
 import { Agent } from 'http';
 import { URL } from 'url';
 import { mintToken, MintTokenParams, MintTokenResponse } from './api-endpoints';
 import { buildRequestError, HTTPResponseError } from './errors';
-
+import { AuthHeaders } from './interfaces/auth.interface';
 import {
   Logger,
   LogLevel,
@@ -18,12 +18,15 @@ import {
 } from './logging';
 
 export interface ClientOptions {
-  auth: string;
+  accessId: string;
+  privateKey: string;
   timeoutMs?: number;
   baseUrl?: string;
   logLevel?: LogLevel;
   logger?: Logger;
   agent?: Agent;
+
+  // TODO: use enum
   coinviseVersion?: string;
 }
 
@@ -38,7 +41,8 @@ export interface RequestParameters {
 }
 
 export default class Client {
-  #auth: string;
+  #accessId: string;
+  #privateKey: string;
   #logger: Logger;
   #logLevel: LogLevel;
   #got: Got;
@@ -47,9 +51,10 @@ export default class Client {
   static readonly defaultCoinviseVersion = '2021-05-13';
 
   public constructor(options: ClientOptions) {
-    this.#auth = options?.auth;
-    this.#logLevel = options?.logLevel ?? LogLevel.WARN;
-    this.#logger = options?.logger ?? makeConsoleLogger(this.constructor.name);
+    this.#accessId = options.accessId;
+    this.#privateKey = options.privateKey;
+    this.#logLevel = options.logLevel ?? LogLevel.WARN;
+    this.#logger = options.logger ?? makeConsoleLogger(this.constructor.name);
 
     const prefixUrl = (options?.baseUrl ?? 'https://api.coinvise.co') + '/v1/';
     const timeout = options?.timeoutMs ?? 60_000;
@@ -83,7 +88,6 @@ export default class Client {
     method,
     query,
     body,
-    auth,
   }: RequestParameters): Promise<Response> {
     this.log(LogLevel.INFO, 'request start', { method, path });
 
@@ -98,7 +102,7 @@ export default class Client {
         method,
         searchParams: query,
         json,
-        headers: this.authAsHeaders(auth ?? this.#auth),
+        headers: this.generateAuthHeaders(this.#accessId, this.#privateKey),
       }).json<Response>();
 
       this.log(LogLevel.INFO, 'request success', { method, path });
@@ -139,6 +143,8 @@ export default class Client {
     },
   };
 
+  // TODO: update webhook url and secret
+
   /**
    * Emits a log message to the console.
    *
@@ -156,21 +162,31 @@ export default class Client {
   }
 
   /**
-   * Transforms an API key or access token into a headers object suitable for an HTTP request.
+   * Transforms an accessId and privateKey into a headers object suitable for an HTTP request.
    *
-   * This method uses the instance's value as the default when the input is undefined. If neither are defined, it returns
+   * This method uses the instance's value. If defined, it returns
    * an empty object
    *
-   * @param auth API key or access token
+   * @param accessId API key or access token
+   * @param privateKey API key or access token
    * @returns headers key-value object
    */
-  private authAsHeaders(auth?: string): GotHeaders {
-    const headers: GotHeaders = {};
-    const authHeaderValue = auth ?? this.#auth;
-    if (authHeaderValue !== undefined) {
-      headers['authorization'] = `Bearer ${authHeaderValue}`;
-    }
-    return headers;
+  private generateAuthHeaders(
+    accessId: string,
+    privateKey: string
+  ): AuthHeaders {
+    const timestamp = Date.now().toString();
+    const signature = crypto.sign(
+      'sha256',
+      Buffer.from(accessId + timestamp),
+      privateKey
+    );
+
+    return {
+      'x-coinvise-signature': signature.toString('base64'),
+      'x-coinvise-timestamp': timestamp,
+      'x-coinvise-accessid': accessId,
+    };
   }
 }
 
