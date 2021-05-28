@@ -30,9 +30,6 @@ export default class Client {
   #logLevel: LogLevel;
   #got: Got;
 
-  // TODO: change to something meaningful
-  static readonly defaultCoinviseVersion = '2021-05-13';
-
   public constructor(options: ClientOptions) {
     this.#accessId = options.accessId;
     this.#privateKey = options.privateKey;
@@ -122,6 +119,9 @@ export default class Client {
     },
   };
 
+  /**
+   * Changes the url of the webhook
+   */
   public changeWebhookUrl = (
     args: ChangeWebhookUrlParams
   ): Promise<ChangeWebhookUrlResponse> =>

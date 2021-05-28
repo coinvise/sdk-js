@@ -19,7 +19,6 @@ export interface RequestParameters {
   body?: {
     [k: string]: unknown;
   };
-  auth?: string;
 }
 
 export interface User {
