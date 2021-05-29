@@ -1,6 +1,6 @@
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
@@ -14,6 +14,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="https://github.com/mihirgupta0900"><img src="https://avatars.githubusercontent.com/u/37367148?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mihir Gupta</b></sub></a><br /><a href="https://github.com/coinvise/sdk-js/commits?author=mihirgupta0900" title="Code">💻</a> <a href="https://github.com/coinvise/sdk-js/commits?author=mihirgupta0900" title="Documentation">📖</a> <a href="#infra-mihirgupta0900" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
+    <td align="center"><a href="https://jenilt.com/"><img src="https://avatars.githubusercontent.com/u/22861609?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jenil Thakker</b></sub></a><br /><a href="#business-jenil04" title="Business development">💼</a></td>
   </tr>
 </table>
 

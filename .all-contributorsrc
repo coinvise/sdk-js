@@ -20,6 +20,15 @@
         "doc",
         "infra"
       ]
+    },
+    {
+      "login": "jenil04",
+      "name": "Jenil Thakker",
+      "avatar_url": "https://avatars.githubusercontent.com/u/22861609?v=4",
+      "profile": "https://jenilt.com/",
+      "contributions": [
+        "business"
+      ]
     }
   ],
   "contributorsPerLine": 7
