@@ -26,7 +26,7 @@ export type MintTokenParams = {
 };
 
 export type ChangeWebhookUrlParams = {
-  url: string;
+  webhookUrl: string;
 };
 
 export type ChangeWebhookUrlResponse = {

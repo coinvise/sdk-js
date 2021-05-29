@@ -27,7 +27,7 @@ import {
  * Construct a new coinvise instance
  *
  * @class Component
- * @classdesc A generic component
+ * @classdesc Coinvise component
  *
  * @param {Object} options - Options to initialize the component with
  * @param {String} options.accessId - Access Id
@@ -84,11 +84,16 @@ export default class Coinvise {
         : body;
 
     try {
+      const headers = this.generateAuthHeaders(
+        this.#accessId,
+        this.#privateKey
+      );
+
       const response = await this.#got(path, {
         method,
         searchParams: query,
         json,
-        headers: this.generateAuthHeaders(this.#accessId, this.#privateKey),
+        headers,
       }).json<Response>();
 
       this.log(LogLevel.INFO, 'request success', { method, path });
@@ -129,17 +134,20 @@ export default class Coinvise {
     },
   };
 
-  /**
-   * Changes the url of the webhook
-   */
-  public changeWebhookUrl = (
-    args: ChangeWebhookUrlParams
-  ): Promise<ChangeWebhookUrlResponse> =>
-    this.request({
-      path: changeWebhookUrl.path(),
-      method: changeWebhookUrl.method,
-      body: args,
-    });
+  public readonly webhook = {
+    /**
+     * Changes the url of the webhook
+     */
+    changeUrl: (
+      args: ChangeWebhookUrlParams
+    ): Promise<ChangeWebhookUrlResponse> => {
+      return this.request({
+        path: changeWebhookUrl.path(),
+        method: changeWebhookUrl.method,
+        body: args,
+      });
+    },
+  };
 
   /**
    * Emits a log message to the console.
@@ -191,7 +199,7 @@ export default class Coinvise {
         'x-coinvise-accessid': accessId,
       };
     } catch (error) {
-      this.log(LogLevel.WARN, 'Malformed credentials', error);
+      throw new Error('Malformed credentials');
     }
 
     return authHeaders;
