@@ -26,6 +26,9 @@
     "prebuild": "npm run clean",
     "clean": "rm -rf ./build"
   },
+  "files": [
+    "build/**"
+  ],
   "keywords": [
     "coinvise",
     "blockchain",
