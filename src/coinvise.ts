@@ -23,7 +23,17 @@ import {
   makeConsoleLogger,
 } from './logging';
 
-export default class Client {
+/**
+ * Construct a new coinvise instance
+ *
+ * @class Component
+ * @classdesc A generic component
+ *
+ * @param {Object} options - Options to initialize the component with
+ * @param {String} options.accessId - Access Id
+ * @param {String} options.privateKey - Private Key
+ */
+export default class Coinvise {
   #accessId: string;
   #privateKey: string;
   #logger: Logger;
