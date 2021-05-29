@@ -2,8 +2,8 @@
   "name": "coinvise",
   "version": "0.0.2",
   "description": "Coinvise SDK to interact with the Coinvise API (beta)",
-  "main": "./build/src/index.js",
-  "types": "./build/src/index.d.ts",
+  "main": "./build/index.js",
+  "types": "./build/index.d.ts",
   "author": "Coinvise <info@coinvise.co> (https://coinvise.co/)",
   "contributors": [
     "Mihir Gupta <mihir@coinvise.co> (https://www.mihirg.com/)"
