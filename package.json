@@ -24,7 +24,10 @@
     "lint": "eslint src/. && prettier --write --ignore-unknown src/.",
     "prepare": "husky install && npm run lint && npm run build",
     "prebuild": "npm run clean",
-    "clean": "rm -rf ./build"
+    "clean": "rm -rf ./build",
+    "preversion": "npm run lint",
+    "version": "npm run build",
+    "postversion": "git push && git push --tags"
   },
   "files": [
     "build/**"
