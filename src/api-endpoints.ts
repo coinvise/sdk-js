@@ -7,7 +7,7 @@ export const mintToken: Endpoint = {
   pathParams: [],
   queryParams: [],
   bodyParams: [],
-  path: () => '/token',
+  path: () => 'token',
 };
 
 export const changeWebhookUrl: Endpoint = {
@@ -15,7 +15,7 @@ export const changeWebhookUrl: Endpoint = {
   pathParams: [],
   queryParams: [],
   bodyParams: [],
-  path: () => '/users/webhook',
+  path: () => 'users/webhook',
 };
 
 export type MintTokenParams = {
