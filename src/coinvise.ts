@@ -171,18 +171,30 @@ export default class Coinvise {
     accessId: string,
     privateKey: string
   ): AuthHeaders {
-    const timestamp = Date.now().toString();
-    const signature = crypto.sign(
-      'sha256',
-      Buffer.from(accessId + timestamp),
-      privateKey
-    );
-
-    return {
-      'x-coinvise-signature': signature.toString('base64'),
-      'x-coinvise-timestamp': timestamp,
-      'x-coinvise-accessid': accessId,
+    let authHeaders: AuthHeaders = {
+      'x-coinvise-signature': '',
+      'x-coinvise-timestamp': '',
+      'x-coinvise-accessid': '',
     };
+
+    try {
+      const timestamp = Date.now().toString();
+      const signature = crypto.sign(
+        'sha256',
+        Buffer.from(accessId + timestamp),
+        privateKey
+      );
+
+      authHeaders = {
+        'x-coinvise-signature': signature.toString('base64'),
+        'x-coinvise-timestamp': timestamp,
+        'x-coinvise-accessid': accessId,
+      };
+    } catch (error) {
+      this.log(LogLevel.WARN, 'Malformed credentials', error);
+    }
+
+    return authHeaders;
   }
 }
 
