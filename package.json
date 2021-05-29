@@ -27,7 +27,7 @@
     "clean": "rm -rf ./build",
     "preversion": "npm run lint",
     "version": "npm run build",
-    "postversion": "git push && git push --tags"
+    "postversion": "git push origin main && git push origin --tags"
   },
   "files": [
     "build/**"
