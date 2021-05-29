@@ -1,10 +1,18 @@
+# Coinvise JS SDK
+
+SDK for interacting with the coinvise API (closed beta)
+
+## Documentation
+
+[Docs](https://www.notion.so/coinvise/Coinvise-API-bf23e380567d46748115722f15020354)
+
+## Contributors ✨
+
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
 [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
-
-## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
