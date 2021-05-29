@@ -1,6 +1,6 @@
 {
   "name": "coinvise",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "description": "Coinvise SDK to interact with the Coinvise API (beta)",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
