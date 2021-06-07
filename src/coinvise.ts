@@ -1,7 +1,5 @@
 import crypto from 'crypto';
-import got, { Agents as GotAgents, Got } from 'got';
-import { Agent } from 'http';
-import { URL } from 'url';
+import got, { Got } from 'got';
 import {
   changeWebhookUrl,
   ChangeWebhookUrlParams,
@@ -301,26 +299,26 @@ export default class Coinvise {
   }
 }
 
-function makeAgentOption(
-  prefixUrl: string,
-  agent: Agent | undefined
-): GotAgents | undefined {
-  if (agent === undefined) {
-    return undefined;
-  }
-  return {
-    [selectProtocol(prefixUrl)]: agent,
-  };
-}
+// function makeAgentOption(
+//   prefixUrl: string,
+//   agent: Agent | undefined
+// ): GotAgents | undefined {
+//   if (agent === undefined) {
+//     return undefined;
+//   }
+//   return {
+//     [selectProtocol(prefixUrl)]: agent,
+//   };
+// }
 
-function selectProtocol(prefixUrl: string): 'http' | 'https' {
-  const url = new URL(prefixUrl);
+// function selectProtocol(prefixUrl: string): 'http' | 'https' {
+//   const url = new URL(prefixUrl);
 
-  if (url.protocol === 'https:') {
-    return 'https';
-  } else if (url.protocol === 'http:') {
-    return 'http';
-  }
+//   if (url.protocol === 'https:') {
+//     return 'https';
+//   } else if (url.protocol === 'http:') {
+//     return 'http';
+//   }
 
-  throw new TypeError('baseUrl option must begin with "https://" or "http://"');
-}
+//   throw new TypeError('baseUrl option must begin with "https://" or "http://"');
+// }
