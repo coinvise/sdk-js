@@ -1,0 +1,9 @@
+{
+  "extends": "@coinvise/tsconfig/base.json",
+  "include": ["src/**/*", "test/**/*"],
+  "exclude": ["node_modules"],
+  "compilerOptions": {
+    "outDir": "dist",
+    "lib": ["es2015"]
+  }
+}

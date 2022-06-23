@@ -1,61 +1,32 @@
 {
-  "name": "coinvise",
-  "version": "0.2.0",
-  "description": "Coinvise SDK to interact with the Coinvise API (beta)",
-  "main": "./build/index.js",
-  "types": "./build/index.d.ts",
-  "author": "Coinvise <info@coinvise.co> (https://coinvise.co/)",
-  "contributors": [
-    "Mihir Gupta <mihir@coinvise.co> (https://www.mihirg.com/)"
+  "name": "sdk-js",
+  "version": "0.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "configs/*"
   ],
-  "homepage": "https://github.com/coinvise/sdk-js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/coinvise/sdk-js/"
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
-  "bugs": {
-    "url": "https://github.com/coinvise/sdk-js/issues"
+  "devDependencies": {
+    "eslint-config-coinvise": "workspace:*",
+    "@coinvise/eslint-next": "workspace:*",
+    "@coinvise/lint-staged": "workspace:*",
+    "@coinvise/prettier": "workspace:*",
+    "eslint": "^8.17.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.0",
+    "prettier": "latest",
+    "turbo": "latest"
   },
   "engines": {
-    "node": ">=12"
+    "npm": ">=7.0.0",
+    "node": ">=14.0.0"
   },
-  "scripts": {
-    "build": "tsc",
-    "lint": "eslint src/. && prettier --write --ignore-unknown src/.",
-    "prepare": "husky install && npm run lint && npm run build",
-    "prebuild": "npm run clean",
-    "clean": "rm -rf ./build",
-    "preversion": "npm run lint",
-    "version": "npm run build",
-    "postversion": "git push origin main && git push origin --tags"
-  },
-  "files": [
-    "build/**"
-  ],
-  "keywords": [
-    "coinvise",
-    "blockchain",
-    "rest",
-    "coinvise-api"
-  ],
-  "license": "MIT",
-  "devDependencies": {
-    "@types/node": "^15.6.1",
-    "@typescript-eslint/eslint-plugin": "^4.25.0",
-    "@typescript-eslint/parser": "^4.25.0",
-    "all-contributors-cli": "^6.20.0",
-    "eslint": "^7.27.0",
-    "eslint-config-prettier": "^8.3.0",
-    "husky": "^6.0.0",
-    "lint-staged": "^11.0.0",
-    "prettier": "^2.3.0",
-    "ts-node": "^10.0.0",
-    "typescript": "^4.2.4"
-  },
-  "dependencies": {
-    "got": "^11.8.2"
-  },
-  "lint-staged": {
-    "**/*": "npm run lint"
-  }
+  "dependencies": {},
+  "packageManager": "pnpm@7.2.1"
 }
