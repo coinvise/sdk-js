@@ -1,0 +1,21 @@
+{
+  "name": "@coinvise/eslint-next",
+  "version": "0.0.0",
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "private": true,
+  "license": "MIT",
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.27.0",
+    "@typescript-eslint/parser": "^5.27.0",
+    "eslint": "^8.17.0",
+    "eslint-config-next": "^12.0.8",
+    "eslint-config-prettier": "^8.3.0",
+    "typescript": "^4.7.3"
+  },
+  "devDependencies": {
+    "@types/node": "16.x"
+  }
+}
