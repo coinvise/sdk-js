@@ -1,0 +1,58 @@
+{
+  "name": "coinvise",
+  "version": "0.3.0",
+  "description": "Coinvise SDK to interact with the Coinvise API (beta)",
+  "source": "src/index.ts",
+  "main": "dist/index.js",
+  "types": "dist/types.d.ts",
+  "author": "Coinvise <info@coinvise.co> (https://coinvise.co/)",
+  "contributors": [
+    "Mihir Gupta <mihir@coinvise.co> (https://www.mihirg.com/)"
+  ],
+  "homepage": "https://github.com/coinvise/sdk-js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/coinvise/sdk-js/"
+  },
+  "bugs": {
+    "url": "https://github.com/coinvise/sdk-js/issues"
+  },
+  "engines": {
+    "node": ">=12"
+  },
+  "scripts": {
+    "build": "tsc --project tsconfig.build.json",
+    "lint": "eslint src",
+    "check": "tsc --noEmit --project tsconfig.build.json",
+    "docs": "typedoc --out docs src/index.ts",
+    "ci": "npm run check && npm run lint"
+  },
+  "keywords": [
+    "coinvise",
+    "blockchain",
+    "rest",
+    "coinvise-api"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@ethersproject/abi": "^5.6.4",
+    "@ethersproject/abstract-provider": "^5.6.1",
+    "@ethersproject/providers": "^5.6.8",
+    "@gnosis.pm/safe-core-sdk": "^2.1.0",
+    "@gnosis.pm/safe-service-client": "^1.1.2",
+    "axios": "^0.27.2",
+    "ethers": "^5.6.8",
+    "lodash.chunk": "^4.2.0",
+    "lodash.omit": "^4.5.0"
+  },
+  "devDependencies": {
+    "@coinvise/lint-staged": "workspace:*",
+    "@coinvise/tsconfig": "workspace:*",
+    "@types/lodash.chunk": "^4.2.7",
+    "@types/lodash.omit": "^4.5.7",
+    "eslint": "^8.17.0",
+    "eslint-config-coinvise": "workspace:*",
+    "typedoc": "^0.22.17",
+    "typescript": "^4.7.3"
+  }
+}
