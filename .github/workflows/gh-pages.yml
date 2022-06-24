@@ -2,8 +2,8 @@ name: GitHub Pages
 
 on:
   push:
-    # branches:
-    #   - main
+    branches:
+      - main
   workflow_dispatch:
 jobs:
   deploy:
@@ -43,4 +43,4 @@ jobs:
         if: ${{ github.ref == 'refs/heads/main' }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs
+          publish_dir: ./packages/coinvise/docs
